@@ -174,8 +174,34 @@ http://localhost:5000
 - `Migrations/` - EF Core migrations.
 - `Views/` - Razor views for the application UI.
 
-## Notes
+## Repository
 
-- The project uses `Pomelo.EntityFrameworkCore.MySql` for MySQL integration.
-- SMTP settings are optional but required for email notifications.
-- The app uses EF Core migrations to manage schema updates.
+The source code for SportSystem is available on GitHub:
+
+[https://github.com/Projects-C-Sharp/SportSystem.git](https://github.com/Projects-C-Sharp/SportSystem.git)
+
+## Live Demo
+
+A live version of the application is available at:
+
+[https://vasco.andrescortes.dev](https://vasco.andrescortes.dev)
+
+## Contributing
+
+Contributions are welcome. Please follow these steps:
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add your feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Built with ASP.NET Core and Entity Framework Core.
+- Uses MySQL for data persistence.
+- Email notifications powered by SMTP.
