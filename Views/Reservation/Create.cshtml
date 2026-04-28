@@ -1,0 +1,234 @@
+@model SportSistem.Models.Entities.Reservation
+
+@{
+    ViewData["Title"] = "New Reservation";
+}
+
+<style>
+    body {
+        background: radial-gradient(circle at top, #111827, #0b1220 60%, #050814);
+        color: white;
+    }
+
+    /* HEADER */
+    .ss-page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .ss-page-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    .ss-page-title span {
+        color: #ff4500;
+    }
+
+    /* CARD */
+    .ss-card {
+        background: rgba(20, 20, 20, 0.92);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        max-width: 650px;
+        margin: 0 auto;
+        transition: 0.25s ease;
+    }
+
+    .ss-card:hover {
+        border-color: rgba(255, 69, 0, 0.25);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    .ss-card-body {
+        padding: 2rem;
+    }
+
+    /* FORM */
+    .ss-form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.2rem;
+    }
+
+    .ss-label {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #a9a9a9;
+        margin-bottom: 6px;
+    }
+
+    .ss-input {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 10px;
+        padding: 10px 12px;
+        color: white;
+        outline: none;
+        transition: 0.2s ease;
+    }
+
+    .ss-input:focus {
+        border-color: rgba(255,69,0,0.5);
+        box-shadow: 0 0 0 3px rgba(255,69,0,0.15);
+    }
+
+    select.ss-input option {
+        background: #111827;
+        color: white;
+    }
+
+    /* GRID TIME */
+    .ss-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    /* DIVIDER */
+    .ss-divider {
+        border: none;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        margin: 1.5rem 0;
+    }
+
+    /* BUTTONS */
+    .btn-sport {
+        padding: 0.9rem 1.2rem;
+        border-radius: 10px;
+
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+
+        transition: 0.2s ease;
+
+        background: linear-gradient(135deg, #ff4500, #ff6a1a);
+        color: #0b0b0b;
+
+        box-shadow: 0 10px 25px rgba(255,69,0,0.2);
+        width: 100%;
+    }
+
+    .btn-sport:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 35px rgba(255,69,0,0.3);
+    }
+
+    .btn-sport-outline {
+        background: transparent;
+        color: white;
+        border: 1px solid rgba(255,69,0,0.5);
+        box-shadow: none;
+    }
+
+    .btn-sport-outline:hover {
+        background: rgba(255,69,0,0.1);
+    }
+
+    /* ACTIONS */
+    .ss-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 1rem;
+    }
+
+    /* VALIDATION */
+    .text-danger {
+        font-size: 0.8rem;
+        margin-top: 4px;
+        color: #ff6b6b;
+    }
+
+    /* RESPONSIVE */
+    @@media (max-width: 576px) {
+        .ss-grid-2 {
+            grid-template-columns: 1fr;
+        }
+
+        .ss-actions {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<div class="ss-page-header">
+    <h1 class="ss-page-title">New <span>Reservation</span></h1>
+    <a asp-action="Index" class="btn-sport btn-sport-outline">Back</a>
+</div>
+
+<div class="ss-card">
+    <div class="ss-card-body">
+
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="ss-form-group">
+                <label class="ss-label" asp-for="UserId">User</label>
+                <select asp-for="UserId" class="ss-input" asp-items="ViewBag.Users"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+
+            <div class="ss-form-group">
+                <label class="ss-label" asp-for="SpaceId">Space</label>
+                <select asp-for="SpaceId" class="ss-input" asp-items="ViewBag.Spaces"></select>
+                <span asp-validation-for="SpaceId" class="text-danger"></span>
+            </div>
+
+            <div class="ss-form-group">
+                <label class="ss-label" asp-for="Date">Date</label>
+                <input asp-for="Date" class="ss-input" type="date" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="ss-grid-2">
+
+                <div class="ss-form-group">
+                    <label class="ss-label" asp-for="StartTime">Start Time</label>
+                    <input asp-for="StartTime" class="ss-input" type="time" />
+                    <span asp-validation-for="StartTime" class="text-danger"></span>
+                </div>
+
+                <div class="ss-form-group">
+                    <label class="ss-label" asp-for="EndTime">End Time</label>
+                    <input asp-for="EndTime" class="ss-input" type="time" />
+                    <span asp-validation-for="EndTime" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <hr class="ss-divider" />
+
+            <div class="ss-actions">
+                <button type="submit" class="btn-sport">Confirm Reservation</button>
+                <a asp-action="Index" class="btn-sport btn-sport-outline">Cancel</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

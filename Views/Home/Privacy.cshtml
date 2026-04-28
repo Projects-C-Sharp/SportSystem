@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<style>
+    .ss-page {
+        min-height: 60vh;
+        padding: 4rem 1.5rem;
+        background: #0b0b0b;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ss-page-bg {
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(ellipse 60% 80% at 80% 30%, rgba(255,69,0,0.06) 0%, transparent 60%),
+            radial-gradient(ellipse 50% 60% at 10% 70%, rgba(255,69,0,0.03) 0%, transparent 65%);
+        pointer-events: none;
+    }
+
+    .ss-page-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #ff4500, transparent);
+    }
+
+    .ss-page-content {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .ss-eyebrow {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #ff4500;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .ss-eyebrow::before {
+        content: '';
+        width: 28px;
+        height: 2px;
+        background: #ff4500;
+    }
+
+    .ss-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        text-transform: uppercase;
+        line-height: 1;
+        margin-bottom: 1.5rem;
+    }
+
+    .ss-text {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #a9a9a9;
+        margin-bottom: 1.5rem;
+        max-width: 800px;
+    }
+
+    .ss-card {
+        margin-top: 2rem;
+        background: #141414;
+        border: 1px solid #2a2a2a;
+        border-radius: 10px;
+        padding: 2rem;
+    }
+
+    .ss-card h3 {
+        font-family: 'Barlow Condensed', sans-serif;
+        color: #ffffff;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    @@media (max-width: 576px) {
+        .ss-page {
+            padding: 3rem 1rem;
+            text-align: left;
+        }
+
+        .ss-card {
+            padding: 1.5rem;
+        }
+    }
+</style>
+
+<section class="ss-page">
+    <div class="ss-page-bg"></div>
+    <div class="ss-page-line"></div>
+
+    <div class="ss-page-content">
+        <p class="ss-eyebrow">Legal Information</p>
+
+        <h1 class="ss-title">@ViewData["Title"]</h1>
+
+        <p class="ss-text">
+            This Privacy Policy explains how SportSistem collects, uses, and protects your personal information when you use our platform.
+        </p>
+
+        <div class="ss-card">
+            <h3>1. Information We Collect</h3>
+            <p class="ss-text">
+                We may collect personal data such as name, email, and booking activity to improve your experience and manage reservations efficiently.
+            </p>
+
+            <h3>2. How We Use Your Data</h3>
+            <p class="ss-text">
+                Your information is used to manage accounts, process reservations, and improve system performance.
+            </p>
+
+            <h3>3. Data Protection</h3>
+            <p class="ss-text">
+                We implement security measures to protect your data from unauthorized access or misuse.
+            </p>
+
+            <h3>4. Contact</h3>
+            <p class="ss-text">
+                If you have questions about this policy, please contact the system administrator.
+            </p>
+        </div>
+    </div>
+</section>

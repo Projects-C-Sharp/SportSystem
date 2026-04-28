@@ -1,0 +1,317 @@
+@model IEnumerable<SportSistem.Models.Entities.Reservation>
+
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<style>
+    body {
+        background: radial-gradient(circle at top, #111827, #0b1220 60%, #050814);
+        color: white;
+    }
+
+    /* HEADER */
+    .ss-page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .ss-page-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    /* CARD TABLE WRAPPER */
+    .ss-card {
+        background: rgba(20, 20, 20, 0.9);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    /* TABLE */
+    .ss-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .ss-table thead {
+        background: rgba(255,255,255,0.04);
+    }
+
+    .ss-table th {
+        text-align: left;
+        padding: 14px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #a9a9a9;
+        font-family: 'Barlow Condensed', sans-serif;
+    }
+
+    .ss-table td {
+        padding: 14px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        font-size: 0.85rem;
+        color: white;
+        vertical-align: middle;
+    }
+
+    .ss-table tr:hover {
+        background: rgba(255,255,255,0.03);
+    }
+
+    /* USER CELL */
+    .reservation-user {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .reservation-space {
+        color: #a9a9a9;
+        font-size: 0.85rem;
+    }
+
+    /* BADGES */
+    .ss-badge {
+        display: inline-flex;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .ss-badge-scheduled {
+        background: rgba(255,145,0,0.12);
+        color: #ffb14a;
+        border: 1px solid rgba(255,145,0,0.25);
+    }
+
+    .ss-badge-cancelled {
+        background: rgba(255,60,60,0.12);
+        color: #ff6b6b;
+        border: 1px solid rgba(255,60,60,0.25);
+    }
+
+    .ss-badge-completed {
+        background: rgba(0,255,120,0.12);
+        color: #7CFFB2;
+        border: 1px solid rgba(0,255,120,0.25);
+    }
+
+    /* ACTIONS */
+    .reservation-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    /* BUTTON SYSTEM (CONSISTENTE GLOBAL) */
+    .btn-sport {
+        padding: 0.6rem 1rem;
+        border-radius: 10px;
+
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+
+        transition: 0.2s ease;
+
+        background: linear-gradient(135deg, #ff4500, #ff6a1a);
+        color: #0b0b0b;
+
+        box-shadow: 0 10px 25px rgba(255,69,0,0.2);
+    }
+
+    .btn-sport:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 35px rgba(255,69,0,0.3);
+    }
+
+    .btn-sport-outline {
+        background: transparent;
+        color: white;
+        border: 1px solid rgba(255,69,0,0.5);
+        box-shadow: none;
+    }
+
+    .btn-sport-outline:hover {
+        background: rgba(255,69,0,0.1);
+    }
+
+    .btn-sport-danger {
+        background: rgba(255,60,60,0.12);
+        color: #ff6b6b;
+        border: 1px solid rgba(255,60,60,0.25);
+        box-shadow: none;
+    }
+
+    .btn-sport-danger:hover {
+        background: rgba(255,60,60,0.2);
+    }
+
+    /* ALERTS */
+    .ss-alert {
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .ss-alert-success {
+        background: rgba(0,255,120,0.1);
+        border: 1px solid rgba(0,255,120,0.2);
+        color: #7CFFB2;
+    }
+
+    .ss-alert-danger {
+        background: rgba(255,0,0,0.1);
+        border: 1px solid rgba(255,0,0,0.2);
+        color: #ff8a8a;
+    }
+
+    /* RESPONSIVE */
+    @@media (max-width: 768px) {
+        .ss-table thead {
+            display: none;
+        }
+
+        .ss-table tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .ss-table td {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 10px;
+        }
+
+        .ss-table td::before {
+            content: attr(data-label);
+            color: #a9a9a9;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .reservation-actions {
+            justify-content: flex-start;
+        }
+    }
+</style>
+
+<div class="ss-page-header">
+    <h1 class="ss-page-title">Reservations</h1>
+    <a asp-action="Create" class="btn-sport">+ New Reservation</a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="ss-alert ss-alert-success">@TempData["Success"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="ss-alert ss-alert-danger">@TempData["Error"]</div>
+}
+
+<div class="ss-card">
+    <table class="ss-table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Space</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Status</th>
+                <th style="text-align:right;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var reservation in Model)
+            {
+                <tr>
+                    <td data-label="User" class="reservation-user">
+                        @reservation.User?.Name
+                    </td>
+
+                    <td data-label="Space" class="reservation-space">
+                        @reservation.Space?.Name
+                    </td>
+
+                    <td data-label="Date">@reservation.Date.ToShortDateString()</td>
+                    <td data-label="Start">@reservation.StartTime.ToShortTimeString()</td>
+                    <td data-label="End">@reservation.EndTime.ToShortTimeString()</td>
+
+                    <td data-label="Status">
+                        @{
+                            var badgeClass = reservation.State switch
+                            {
+                                SportSistem.Models.Enums.StateReservation.Scheduled => "ss-badge-scheduled",
+                                SportSistem.Models.Enums.StateReservation.Cancelled => "ss-badge-cancelled",
+                                _ => "ss-badge-scheduled"
+                            };
+                        }
+
+                        <span class="ss-badge @badgeClass">@reservation.State</span>
+                    </td>
+
+                    <td data-label="Actions">
+                        <div class="reservation-actions">
+
+                            <a class="btn-sport btn-sport-outline"
+                               asp-action="Details"
+                               asp-route-id="@reservation.Id">
+                                Details
+                            </a>
+
+                            @if (reservation.State == SportSistem.Models.Enums.StateReservation.Scheduled)
+                            {
+                                <form asp-action="Cancel"
+                                      asp-route-id="@reservation.Id"
+                                      method="post"
+                                      style="display:inline;">
+
+                                    <button type="submit"
+                                            class="btn-sport btn-sport-danger"
+                                            onclick="return confirm('Cancel this reservation?');">
+                                        Cancel
+                                    </button>
+
+                                </form>
+                            }
+
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

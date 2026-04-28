@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="ss-hero">
+    <div class="ss-hero-bg"></div>
+    <div class="ss-hero-line"></div>
+
+    <div class="ss-hero-content">
+        <p class="ss-eyebrow">Sport Facility Management</p>
+
+        <h1 class="ss-hero-title">
+            Manage<br>
+            Every <em>Play.</em>
+        </h1>
+
+        <p class="ss-hero-desc">
+            SportSistem centralizes your facility's users, spaces, and reservations in one streamlined platform built for performance.
+        </p>
+
+        <div class="ss-hero-actions">
+            <a asp-controller="Reservation" asp-action="Create" class="btn-sport">New Reservation</a>
+            <a asp-controller="Space" asp-action="Index" class="btn-sport btn-sport-outline">View Spaces</a>
+        </div>
+    </div>
+</section>

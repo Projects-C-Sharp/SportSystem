@@ -1,0 +1,210 @@
+@model SportSistem.Models.Entities.User
+
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<style>
+    body {
+        background: radial-gradient(circle at top, #111827, #0b1220 60%, #050814);
+        color: white;
+    }
+
+    /* HEADER */
+    .ss-page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .ss-page-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    .ss-page-title span {
+        color: #ff4500;
+    }
+
+    /* CARD FORM */
+    .ss-card {
+        background: rgba(20, 20, 20, 0.9);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        max-width: 600px;
+        margin: 0 auto;
+        transition: 0.25s ease;
+    }
+
+    .ss-card:hover {
+        border-color: rgba(255, 69, 0, 0.25);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    .ss-card-body {
+        padding: 2rem;
+    }
+
+    /* FORM */
+    .ss-form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.2rem;
+    }
+
+    .ss-label {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #a9a9a9;
+        margin-bottom: 6px;
+    }
+
+    .ss-input {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        padding: 10px 12px;
+        color: white;
+        outline: none;
+        transition: 0.2s ease;
+    }
+
+    .ss-input:focus {
+        border-color: #ff4500;
+        box-shadow: 0 0 0 2px rgba(255,69,0,0.15);
+    }
+
+    .ss-input::placeholder {
+        color: rgba(255,255,255,0.3);
+    }
+
+    /* DIVIDER */
+    .ss-divider {
+        border: none;
+        height: 1px;
+        background: rgba(255,255,255,0.08);
+        margin: 1.5rem 0;
+    }
+
+    /* ALERTS */
+    .text-danger {
+        font-size: 0.8rem;
+        margin-top: 4px;
+        color: #ff6b6b;
+    }
+
+    /* BUTTONS (reuse system) */
+    .btn-sport {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        padding: 0.9rem 1.2rem;
+        border-radius: 10px;
+
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+
+        background: linear-gradient(135deg, #ff4500, #ff6a1a);
+        color: #0b0b0b;
+
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+
+        transition: 0.2s ease;
+        box-shadow: 0 10px 25px rgba(255,69,0,0.2);
+    }
+
+    .btn-sport:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 35px rgba(255,69,0,0.3);
+    }
+
+    .btn-sport-outline {
+        background: transparent;
+        color: white;
+        border: 1px solid rgba(255,69,0,0.5);
+        box-shadow: none;
+    }
+
+    .btn-sport-outline:hover {
+        background: rgba(255,69,0,0.1);
+    }
+
+    /* RESPONSIVE */
+    @@media (max-width: 576px) {
+        .ss-page-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .ss-card-body {
+            padding: 1.5rem;
+        }
+    }
+</style>
+
+<div class="ss-page-header">
+    <h1 class="ss-page-title">New <span>User</span></h1>
+    <a asp-action="Index" class="btn-sport btn-sport-outline">Back</a>
+</div>
+
+<div class="ss-card">
+    <div class="ss-card-body">
+
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="ss-form-group">
+                <label asp-for="Name" class="ss-label">Full Name</label>
+                <input asp-for="Name" class="ss-input" placeholder="e.g. Carlos Mejia" />
+                <span asp-validation-for="Name"></span>
+            </div>
+
+            <div class="ss-form-group">
+                <label asp-for="Identification" class="ss-label">Identification</label>
+                <input asp-for="Identification" class="ss-input" placeholder="ID Number" />
+                <span asp-validation-for="Identification"></span>
+            </div>
+
+            <div class="ss-form-group">
+                <label asp-for="Phone" class="ss-label">Phone</label>
+                <input asp-for="Phone" class="ss-input" placeholder="+57 300 000 0000" />
+                <span asp-validation-for="Phone"></span>
+            </div>
+
+            <div class="ss-form-group">
+                <label asp-for="Email" class="ss-label">Email</label>
+                <input asp-for="Email" class="ss-input" placeholder="user@example.com" />
+                <span asp-validation-for="Email"></span>
+            </div>
+
+            <hr class="ss-divider" />
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="submit" class="btn-sport">Save User</button>
+                <a asp-action="Index" class="btn-sport btn-sport-outline">Cancel</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

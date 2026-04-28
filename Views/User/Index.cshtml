@@ -1,0 +1,316 @@
+@model IEnumerable<SportSistem.Models.Entities.User>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<style>
+    body {
+        background: radial-gradient(circle at top, #111827, #0b1220 60%, #050814);
+        color: white;
+        min-height: 100vh;
+    }
+
+    /* HEADER */
+    .ss-page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .ss-page-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: white;
+        margin: 0;
+    }
+
+    /* GRID */
+    .user-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.2rem;
+    }
+
+    /* CARD */
+    .ss-card {
+        background: rgba(20, 20, 20, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        transition: all 0.25s ease;
+        height: 100%;
+    }
+
+    .ss-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(255, 69, 0, 0.3);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    /* TOP */
+    .user-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .ss-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ff4500, #ff7a18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        color: #fff;
+        flex-shrink: 0;
+    }
+
+    .user-info {
+        min-width: 0;
+    }
+
+    .user-name {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        margin: 0;
+        text-transform: uppercase;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .user-email {
+        font-size: 0.8rem;
+        color: #a9a9a9;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* META */
+    .user-meta {
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .meta-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+    }
+
+    .meta-key {
+        color: #a9a9a9;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .meta-val {
+        color: #fff;
+    }
+
+    /* ALERTS */
+    .ss-alert {
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .ss-alert-success {
+        background: rgba(0,255,120,0.1);
+        border: 1px solid rgba(0,255,120,0.2);
+        color: #7CFFB2;
+    }
+
+    .ss-alert-danger {
+        background: rgba(255,0,0,0.1);
+        border: 1px solid rgba(255,0,0,0.2);
+        color: #ff8a8a;
+    }
+
+    /* =========================
+       BUTTON SYSTEM (FIXED)
+    ========================= */
+
+    .user-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: auto;
+    }
+
+    .btn-action {
+        flex: 1;
+        padding: 8px 10px;
+        border-radius: 10px;
+
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+
+        text-align: center;
+        text-decoration: none;
+
+        border: 1px solid transparent;
+
+        transition: all 0.2s ease;
+        cursor: pointer;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* VIEW */
+    .btn-view {
+        background: rgba(255, 255, 255, 0.06);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-view:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-2px);
+    }
+
+    /* EDIT */
+    .btn-edit {
+        background: rgba(255, 145, 0, 0.12);
+        color: #ffb14a;
+        border: 1px solid rgba(255, 145, 0, 0.25);
+    }
+
+    .btn-edit:hover {
+        background: rgba(255, 145, 0, 0.2);
+        transform: translateY(-2px);
+    }
+
+    /* DELETE */
+    .btn-delete {
+        background: rgba(255, 60, 60, 0.10);
+        color: #ff6b6b;
+        border: 1px solid rgba(255, 60, 60, 0.25);
+    }
+
+    .btn-delete:hover {
+        background: rgba(255, 60, 60, 0.18);
+        transform: translateY(-2px);
+    }
+
+    .btn-form {
+        flex: 1;
+        margin: 0;
+    }
+
+    /* RESPONSIVE */
+    @@media (max-width: 576px) {
+        .ss-page-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+
+<div class="ss-page-header">
+    <h1 class="ss-page-title">Users</h1>
+    <a asp-action="Create" class="btn-sport">+ New User</a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="ss-alert ss-alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="ss-alert ss-alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="user-grid">
+
+    @foreach (var user in Model)
+    {
+        <div class="ss-card">
+
+            <div class="user-top">
+                <div class="ss-avatar">
+                    @user.Name.Substring(0, 1).ToUpper()
+                </div>
+
+                <div class="user-info">
+                    <p class="user-name">@user.Name</p>
+                    <span class="user-email">@user.Email</span>
+                </div>
+            </div>
+
+            <div class="user-meta">
+                <div class="meta-row">
+                    <span class="meta-key">ID</span>
+                    <span class="meta-val">@user.Identification</span>
+                </div>
+
+                <div class="meta-row">
+                    <span class="meta-key">Phone</span>
+                    <span class="meta-val">@user.Phone</span>
+                </div>
+            </div>
+
+            <div class="user-actions">
+
+                <a class="btn-action btn-view"
+                   asp-action="Details"
+                   asp-route-id="@user.Id">
+                    View
+                </a>
+
+                <a class="btn-action btn-edit"
+                   asp-action="Edit"
+                   asp-route-id="@user.Id">
+                    Edit
+                </a>
+
+                <form asp-action="Destoy"
+                      asp-route-id="@user.Id"
+                      method="post"
+                      onsubmit="return confirm('Delete this user?');"
+                      class="btn-form">
+
+                    <button type="submit" class="btn-action btn-delete">
+                        Delete
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    }
+
+</div>

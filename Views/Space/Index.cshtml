@@ -1,0 +1,336 @@
+@model IEnumerable<SportSistem.Models.Entities.Space>
+
+@{
+    ViewData["Title"] = "Spaces";
+}
+
+<style>
+    body {
+        background: radial-gradient(circle at top, #111827, #0b1220 60%, #050814);
+        color: white;
+        min-height: 100vh;
+    }
+
+    /* HEADER */
+    .ss-page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .ss-page-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    .ss-page-title span {
+        color: #ff4500;
+    }
+
+    /* ALERTS */
+    .ss-alert {
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .ss-alert-success {
+        background: rgba(0,255,120,0.1);
+        border: 1px solid rgba(0,255,120,0.2);
+        color: #7CFFB2;
+    }
+
+    .ss-alert-danger {
+        background: rgba(255,0,0,0.1);
+        border: 1px solid rgba(255,0,0,0.2);
+        color: #ff8a8a;
+    }
+
+    /* FILTER BAR */
+    .ss-filter {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 1.75rem;
+        flex-wrap: wrap;
+    }
+
+    .ss-label {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #a9a9a9;
+        white-space: nowrap;
+    }
+
+    .ss-input {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 10px;
+        padding: 8px 12px;
+        color: white;
+        outline: none;
+        transition: 0.2s ease;
+    }
+
+    /* 🔥 FIX IMPORTANTE PARA OPTIONS */
+    .ss-input option {
+        background: #0b1220;
+        color: white;
+    }
+
+    .ss-input:focus {
+        border-color: #ff4500;
+        box-shadow: 0 0 0 2px rgba(255,69,0,0.15);
+    }
+
+    /* CARD TABLE */
+    .ss-card {
+        background: rgba(20, 20, 20, 0.9);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .ss-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .ss-table thead {
+        background: rgba(255,255,255,0.03);
+    }
+
+    .ss-table th {
+        text-align: left;
+        padding: 14px 16px;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #a9a9a9;
+    }
+
+    .ss-table td {
+        padding: 14px 16px;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        color: white;
+        font-size: 0.9rem;
+        vertical-align: middle;
+    }
+
+    .ss-table tr:hover {
+        background: rgba(255,255,255,0.03);
+    }
+
+    /* NAME STYLE */
+    .space-name {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    /* BADGE */
+    .ss-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .ss-badge-type {
+        background: rgba(255, 145, 0, 0.12);
+        color: #ffb14a;
+        border-color: rgba(255, 145, 0, 0.25);
+    }
+
+    /* ACTIONS */
+    .space-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .btn-sport {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0.6rem 1rem;
+        border-radius: 10px;
+
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+
+        text-decoration: none;
+        cursor: pointer;
+
+        transition: 0.2s ease;
+        border: none;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #ff4500, #ff6a1a);
+        color: #0b0b0b;
+        box-shadow: 0 10px 25px rgba(255,69,0,0.2);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: white;
+        border: 1px solid rgba(255,69,0,0.5);
+    }
+
+    .btn-outline:hover {
+        background: rgba(255,69,0,0.1);
+        transform: translateY(-2px);
+    }
+
+    .btn-danger {
+        background: rgba(255,60,60,0.1);
+        color: #ff6b6b;
+        border: 1px solid rgba(255,60,60,0.25);
+    }
+
+    .btn-danger:hover {
+        background: rgba(255,60,60,0.18);
+        transform: translateY(-2px);
+    }
+
+    /* RESPONSIVE TABLE */
+    @@media (max-width: 768px) {
+        .ss-table thead {
+            display: none;
+        }
+
+        .ss-table tr {
+            display: block;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .ss-table td {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 12px;
+        }
+
+        .ss-table td::before {
+            content: attr(data-label);
+            color: #a9a9a9;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .space-actions {
+            justify-content: flex-start;
+        }
+    }
+    
+</style>
+
+<div class="ss-page-header">
+    <h1 class="ss-page-title">Sport <span>Spaces</span></h1>
+    <a asp-action="Create" class="btn-sport btn-primary">+ New Space</a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="ss-alert ss-alert-success">@TempData["Success"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="ss-alert ss-alert-danger">@TempData["Error"]</div>
+}
+
+<form asp-action="Index" method="get" class="ss-filter">
+    <label class="ss-label" for="type">Filter by Type</label>
+
+    <select name="type" id="type" class="ss-input" asp-items="ViewBag.Types">
+        <option value="">All Types</option>
+    </select>
+
+    <button type="submit" class="btn-sport btn-outline">Apply</button>
+</form>
+
+<div class="ss-card">
+    <table class="ss-table">
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Capacity</th>
+                <th style="text-align:right;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var space in Model)
+            {
+                <tr>
+                    <td data-label="Name" class="space-name">@space.Name</td>
+
+                    <td data-label="Type">
+                        <span class="ss-badge ss-badge-type">@space.SpaceType</span>
+                    </td>
+
+                    <td data-label="Capacity">@space.Capacity</td>
+
+                    <td data-label="Actions">
+                        <div class="space-actions">
+
+                            <a class="btn-sport btn-outline"
+                               asp-action="Details"
+                               asp-route-id="@space.Id">
+                                View
+                            </a>
+
+                            <a class="btn-sport btn-outline"
+                               asp-action="Edit"
+                               asp-route-id="@space.Id">
+                                Edit
+                            </a>
+
+                            <form asp-action="Destroy"
+                                  asp-route-id="@space.Id"
+                                  method="post"
+                                  onsubmit="return confirm('Delete this space?');">
+
+                                <button type="submit" class="btn-sport btn-danger">
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

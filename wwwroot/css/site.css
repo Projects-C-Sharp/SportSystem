@@ -1,0 +1,43 @@
+:root {
+  --sport-black: #080C10;
+  --sport-dark: #0D1117;
+  --sport-card: #131920;
+  --sport-border: rgba(255,255,255,0.07);
+  --sport-orange: #FF4500;
+  --sport-orange-dim: rgba(255,69,0,0.15);
+  --sport-white: #F0F2F5;
+  --sport-muted: rgba(240,242,245,0.45);
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+}
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
