@@ -1,9 +1,5 @@
 # SportSystem
 
-![Entity-flow](entity-flow.png)
-
-![Use-case-flow](use-case-flow.png)
-
 ## Overview
 
 SportSystem is an ASP.NET Core web application for managing users, sports spaces, and reservations.
@@ -21,6 +17,7 @@ The solution uses Entity Framework Core with MySQL for persistence, and includes
 ## Architecture and Flows
 
 ### Use Case Flows
+![Use-case-flow](use-case-flow.png)
 
 #### User Management
 - Register a new user with name, identification, phone, and email.
@@ -50,7 +47,7 @@ The solution uses Entity Framework Core with MySQL for persistence, and includes
 - Send email notifications when a reservation is created or cancelled.
 
 ## Entity Flow
-
+![Entity-flow](entity-flow.png)
 The application is based on three primary entities:
 
 - `User`
@@ -205,3 +202,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - Built with ASP.NET Core and Entity Framework Core.
 - Uses MySQL for data persistence.
 - Email notifications powered by SMTP.
+
+## Author
+Ismael Vasco
